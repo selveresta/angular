@@ -1,0 +1,21 @@
+<marquee
+  behavior="scroll"
+  direction="left"
+  scrolldelay="60"
+  style="
+    width: fit-content;
+    border: 2px solid;
+    color: #d9470d;
+    font-size: 30px;
+    font-weight: bolder;
+    line-height: 150%;
+    text-shadow: #000000 0px 1px 1px;
+  "
+>
+  <div class="flex justify-between items-center mb-2">
+    <app-one-currency
+      *ngFor="let cur of exchangeService.currencies"
+      [currency]="cur"
+    ></app-one-currency>
+  </div>
+</marquee>
