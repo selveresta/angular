@@ -12,11 +12,5 @@ export class CurrencyHeaderComponent implements OnInit {
   @Input() currencyRate: OneCurrency[] = [];
 
   constructor(public exchangeService: ApiCurrencyService) {}
-  ngOnInit(): void {
-    this.exchangeService.getAllCurrencies().subscribe()
-
-    this.exchangeService.getRatesForCurrency().subscribe();
-  }
-
-  
+  ngOnInit(): void {}
 }

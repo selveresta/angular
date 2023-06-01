@@ -7,7 +7,7 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiCurrencyService {
-  private ApiKey = 'a9aa416e5c66d5586842098e5b2f2936';
+  private ApiKey = 'f0QcEulRLLLp6trL3cPlwzUhBFFTXDIE11SWoxhH';
   private getAllCurrenciesURL =
     'https://api.freecurrencyapi.com/v1/currencies?apikey=f0QcEulRLLLp6trL3cPlwzUhBFFTXDIE11SWoxhH&currencies=';
   private getRatesForCurrencyURL =
@@ -17,7 +17,10 @@ export class ApiCurrencyService {
   currencies: CurrencyModel[] = [];
   currencyRate: OneCurrency[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.getAllCurrencies().subscribe();
+    this.getRatesForCurrency().subscribe();
+  }
 
   getAllCurrencies(): Observable<CurrencyModel[]> {
     return this.http.get<CurrencyModel[]>(this.getAllCurrenciesURL).pipe(
@@ -35,6 +38,7 @@ export class ApiCurrencyService {
         for (let i = 0; i < this.currencies.length; i++) {
           this.currencyRate.push({
             currency: this.rounded(c.data[this.currencies[i].code]),
+            code: this.currencies[i].code,
           });
         }
 
@@ -44,6 +48,20 @@ export class ApiCurrencyService {
         }
       })
     );
+  }
+
+  getRatesForOne(base: string, toCurrency: string): Observable<any> {
+    return this.http
+      .get(
+        this.baseUrl +
+          'latest?apikey=' +
+          this.ApiKey +
+          '&currencies=' +
+          toCurrency +
+          '&base_currency=' +
+          base
+      )
+      .pipe();
   }
 
   private rounded(number: number) {

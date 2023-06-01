@@ -11,6 +11,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CurrencyHeaderComponent } from './components/currency-header/currency-header.component';
 import {HttpClientModule} from "@angular/common/http";
 import { OneCurrencyComponent } from './components/one-currency/one-currency.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { OneCurrencyComponent } from './components/one-currency/one-currency.com
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,31 +1,45 @@
-<form>
-  <div class="flex-col">
-    <div class="flex m-3">
-      <p class="m-5">From:</p>
-      <input
-        class="bg-gray-50 m-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        id="password"
-        type="number"
-      />
-      <select
-        name="fCurrency"
-        id=""
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 w-52 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      ></select>
-    </div>
-    <div class="flex m-3">
-      <p class="m-5 pl-5">To:</p>
-
-      <input
-        class="bg-gray-50 m-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        id="password"
-        type="number"
-      />
-      <select
-        name="sCurrency"
-        id=""
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 w-52 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      ></select>
-    </div>
+<div class="flex-col">
+  <div class="flex m-3">
+    <p class="m-5">From:</p>
+    <input
+      class="bg-gray-50 m-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      type="number"
+      (change)="convertFrom()"
+      [(ngModel)]="from"
+      min="0"
+    />
+    <select
+      name="fCurrency"
+      (change)="convertTo()"
+      [(ngModel)]="fCurrency"
+      class="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 w-52 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    >
+      <option disabled value="null">Select currency</option>
+      <option *ngFor="let i of exchangeService.currencyRate" [value]="i.code">
+        {{ i.code }}
+      </option>
+    </select>
   </div>
-</form>
+  <div class="flex m-3">
+    <p class="m-5 pl-5">To:</p>
+
+    <input
+      class="bg-gray-50 m-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      type="number"
+      [(ngModel)]="to"
+      (change)="convertTo()"
+      min="0"
+    />
+    <select
+      name="sCurrency"
+      (change)="convertFrom()"
+      [(ngModel)]="sCurrency"
+      class="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 w-52 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    >
+      <option disabled value="null">Select currency</option>
+      <option *ngFor="let i of exchangeService.currencyRate" [value]="i.code">
+        {{ i.code }}
+      </option>
+    </select>
+  </div>
+</div>

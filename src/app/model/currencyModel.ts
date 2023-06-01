@@ -9,7 +9,8 @@ export interface CurrencyModel{
 }
 
 export interface OneCurrency{
-  currency: number
+  currency: number,
+  code: string
 }
 
 
